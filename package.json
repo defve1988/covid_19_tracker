@@ -10,8 +10,9 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "d3": "^6.2.0",
+    "dateformat": "^4.3.1",
     "mathjs": "^8.0.1",
-    "plotly": "^1.0.6",
+    "plotly.js": "^1.58.1",
     "vue": "^2.6.11",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"

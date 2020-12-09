@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
+import covid_icon from "@/assets/covid_icon";
+
 
 Vue.use(Vuetify);
 
@@ -10,9 +12,9 @@ export default new Vuetify({
             // change the dark theme to monokai color
             dark: {
                 primary: '#161B1E',
-                secondary: '#1D2528',
+                secondary: '#EBEEF1',
                 success: '#A3E77C',
-                error: '#E06470',
+                error: '#EF5350',
                 info: '#045D56',
                 warning: '#FFB16C',
                 accent: '#B15DFF',
@@ -30,4 +32,11 @@ export default new Vuetify({
             },
         },
     },
+    icons: {
+        values: {
+            covid_icon: { // name of our custom icon
+            component: covid_icon, // our custom component
+          },
+        },
+      },
 });

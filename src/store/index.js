@@ -55,20 +55,20 @@ function create_object(df, col, res_df = [], country_list = [], date_list = []) 
   })
   // add tot to these countries
   var key_country = [{
-      country: "Australia",
-      lat: -25.19128230324078,
-      lon: 134.73664513062488
-    },
-    {
-      country: "Canada",
-      lat: 56.1304,
-      lon: -106.3468
-    },
-    {
-      country: "China",
-      lat: 33.61781734587152,
-      lon: 103.56916987244851
-    },
+    country: "Australia",
+    lat: -25.19128230324078,
+    lon: 134.73664513062488
+  },
+  {
+    country: "Canada",
+    lat: 56.1304,
+    lon: -106.3468
+  },
+  {
+    country: "China",
+    lat: 33.61781734587152,
+    lon: 103.56916987244851
+  },
   ]
 
   key_country.forEach(c => {
@@ -193,8 +193,9 @@ export default new Vuex.Store({
       state.date.curr_index = state.date.date_range.length - 1
       var last_day = state.date.date_range[state.date.curr_index]
       state.date.curr_date = dateFormat(new Date(last_day), "yyyy-mm-dd")
-      state.date.loaded+=1
+      state.date.loaded += 1
       // console.log(new Date-t)
+      return  Promise.resolved(1);
     },
     CHANGE_CURR_DATE(state, index) {
       state.date.curr_index = index

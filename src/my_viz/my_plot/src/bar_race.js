@@ -70,7 +70,7 @@ export default class {
         this.tickDuration = this.layout.tickDuration;
         this.barPadding = (this.height - (this.margin.bottom + this.margin.top)) / (this.top_n * 5);
         this.ticker = null
-        
+
         if (this.svg != null) {
             console.log(this.svg)
             this.svg.selectAll("*").remove();
@@ -157,12 +157,12 @@ export default class {
             .text((d) => d3.format(",.0f")(d.lastValue))
             .style("fill", "grey");
 
-            this.svg
+        this.svg
             .append("rect")
             .attr("x", this.width - this.margin.right - 195)
             .attr("y", this.height - 50)
-            .attr("width",150)
-            .attr("height",35)
+            .attr("width", 150)
+            .attr("height", 35)
             .style("fill", "#424242")
 
         this.dateText = this.svg
@@ -296,19 +296,21 @@ export default class {
                 .remove();
 
             obj.dateText.text(dateFormat(new Date(obj.date), "yyyy-mm-dd"));
-
+            // 
             if (obj.date_index == obj.date_list.length - 1) obj.ticker.stop()
             obj.date_index++
             obj.date = obj.date_list[obj.date_index];
         }
 
         var obj = this
-        if (this.ticker==null){
+        if (this.ticker == null) {
             this.ticker = d3.interval(update, this.tickDuration)
         }
-        else{
-            this.ticker.restart(update,this.tickDuration)
+        else {
+            this.ticker.restart(update, this.tickDuration)
         }
     }
 
 }
+
+

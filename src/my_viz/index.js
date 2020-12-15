@@ -33,7 +33,7 @@ export default class my_viz extends my_df {
                 opacity: res.map((x) => x.op),
             },
             showlegend: false,
-        }, ];
+        },];
         // console.log(this.plots)
         this.plots["g_map"].update_map(trace);
     }
@@ -135,7 +135,7 @@ export default class my_viz extends my_df {
             x = []
             y = []
             y_daily = []
-            for (const [key, ] of Object.entries(df[177]["data"]["tot"]["case"])) {
+            for (const [key,] of Object.entries(df[177]["data"]["tot"]["case"])) {
                 x.push({
                     key: key,
                     axis: dateFormat(new Date(key), "yyyy-mm-dd")
@@ -147,8 +147,9 @@ export default class my_viz extends my_df {
             df.forEach(row => {
                 prev = 0
                 x.forEach((d, index) => {
+                    var val_y = y_daily[index] + row["data"]["tot"]["case"][d.key] - prev
                     y[index] += row["data"]["tot"]["case"][d.key]
-                    y_daily[index] = y_daily[index] + row["data"]["tot"]["case"][d.key] - prev
+                    y_daily[index] = val_y >= 0 ? val_y : 0
                     prev = row["data"]["tot"]["case"][d.key]
                 })
             })
@@ -159,7 +160,7 @@ export default class my_viz extends my_df {
             x = []
             y = []
             y_daily = []
-            for (const [key, ] of Object.entries(df[177]["data"]["tot"]["death"])) {
+            for (const [key,] of Object.entries(df[177]["data"]["tot"]["death"])) {
                 x.push({
                     key: key,
                     axis: dateFormat(new Date(key), "yyyy-mm-dd")
@@ -171,8 +172,9 @@ export default class my_viz extends my_df {
             df.forEach(row => {
                 prev = 0
                 x.forEach((d, index) => {
+                    var val_y = y_daily[index] + row["data"]["tot"]["death"][d.key] - prev
                     y[index] += row["data"]["tot"]["death"][d.key]
-                    y_daily[index] = y_daily[index] + row["data"]["tot"]["death"][d.key] - prev
+                    y_daily[index] = val_y >= 0 ? val_y : 0
                     prev = row["data"]["tot"]["death"][d.key]
                 })
             })
@@ -183,7 +185,7 @@ export default class my_viz extends my_df {
             x = []
             y = []
             y_daily = []
-            for (const [key, ] of Object.entries(df[177]["data"]["tot"]["recover"])) {
+            for (const [key,] of Object.entries(df[177]["data"]["tot"]["recover"])) {
                 x.push({
                     key: key,
                     axis: dateFormat(new Date(key), "yyyy-mm-dd")
@@ -195,8 +197,9 @@ export default class my_viz extends my_df {
             df.forEach(row => {
                 prev = 0
                 x.forEach((d, index) => {
+                    var val_y = y_daily[index] + row["data"]["tot"]["recover"][d.key] - prev
                     y[index] += row["data"]["tot"]["recover"][d.key]
-                    y_daily[index] = y_daily[index] + row["data"]["tot"]["recover"][d.key] - prev
+                    y_daily[index] = val_y >= 0 ? val_y : 0
                     prev = row["data"]["tot"]["recover"][d.key]
                 })
             })
@@ -207,7 +210,7 @@ export default class my_viz extends my_df {
             x = []
             y = []
             y_daily = []
-            for (const [key, ] of Object.entries(df[177]["data"]["tot"]["active"])) {
+            for (const [key,] of Object.entries(df[177]["data"]["tot"]["active"])) {
                 x.push({
                     key: key,
                     axis: dateFormat(new Date(key), "yyyy-mm-dd")
@@ -219,8 +222,9 @@ export default class my_viz extends my_df {
             df.forEach(row => {
                 prev = 0
                 x.forEach((d, index) => {
+                    var y_val = y_daily[index] + row["data"]["tot"]["active"][d.key] - prev
                     y[index] += row["data"]["tot"]["active"][d.key]
-                    y_daily[index] = y_daily[index] + row["data"]["tot"]["active"][d.key] - prev
+                    y_daily[index] = y_val >= 0 ? y_val : 0
                     prev = row["data"]["tot"]["active"][d.key]
                 })
             })
@@ -239,8 +243,14 @@ export default class my_viz extends my_df {
             for (const [key, value] of Object.entries(temp["data"]["tot"]["case"])) {
                 x.push(dateFormat(new Date(key), "yyyy-mm-dd"))
                 y.push(value)
-                y_daily.push(value - prev)
-                prev = value
+                if (value - prev >= 0) {
+                    y_daily.push(value - prev)
+                    prev = value
+                }
+                else {
+                    y_daily.push(null)
+                    prev = 0
+                }
             }
             Case.y = isDaily ? y_daily : y
             Case.x = x
@@ -252,8 +262,14 @@ export default class my_viz extends my_df {
             for (const [key, value] of Object.entries(temp["data"]["tot"]["death"])) {
                 x.push(dateFormat(new Date(key), "yyyy-mm-dd"))
                 y.push(value)
-                y_daily.push(value - prev)
-                prev = value
+                if (value - prev >= 0) {
+                    y_daily.push(value - prev)
+                    prev = value
+                }
+                else {
+                    y_daily.push(null)
+                    prev = 0
+                }
             }
             Death.y = isDaily ? y_daily : y
             Death.x = x
@@ -265,8 +281,14 @@ export default class my_viz extends my_df {
             for (const [key, value] of Object.entries(temp["data"]["tot"]["recover"])) {
                 x.push(dateFormat(new Date(key), "yyyy-mm-dd"))
                 y.push(value)
-                y_daily.push(value - prev)
-                prev = value
+                if (value - prev >= 0) {
+                    y_daily.push(value - prev)
+                    prev = value
+                }
+                else {
+                    y_daily.push(null)
+                    prev = 0
+                }
             }
             Recover.y = isDaily ? y_daily : y
             Recover.x = x

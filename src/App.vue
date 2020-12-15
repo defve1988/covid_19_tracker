@@ -40,12 +40,12 @@
           <v-col cols="4" class="pa-0">
             <v-row>
               <v-col>
-                <BarRace :card_height="455" />
+                <BarRace :card_height="450" />
               </v-col>
             </v-row>
             <v-row>
               <v-col class="py-0">
-                <Daily :card_height="355" />
+                <Daily :card_height="335" />
               </v-col>
             </v-row>
           </v-col>

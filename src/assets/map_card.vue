@@ -38,7 +38,13 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col class="mx-3 px-0 py-0 my-0">
-            <v-btn small class="mx-0 mt-0" @click="load_US" color="grey darken-3">
+            <v-btn
+              small
+              class="mx-0 mt-0"
+              @click="load_US"
+              color="grey darken-3"
+              :loading="isloading"
+            >
               <span v-if="!withUS"> Show US Detail </span>
               <span v-else> Hide US Detail </span>
             </v-btn>
@@ -64,6 +70,7 @@ export default {
     map_height: 750,
     withUS: false,
     isDark: true,
+    isloading: false,
   }),
   computed: {
     ...mapState({
@@ -104,8 +111,11 @@ export default {
       this.my_viz.plots["g_map"].update_layout(layout);
     },
     async load_US() {
+      this.isloading = true;
       this.withUS = !this.withUS;
-      this.LOAD_FILE(this.withUS);
+      await this.LOAD_FILE(this.withUS).then(() => {
+        this.isloading = false;
+      });
     },
     change_values() {
       this.list_data.type = this.tab_type[this.tab_index];

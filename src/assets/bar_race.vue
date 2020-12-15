@@ -101,7 +101,7 @@ export default {
         layout: {
           top_n: 20,
           height: 400,
-          width: 650,
+          width: this.$refs.bar_race.clientWidth,
           tickDuration: 500,
           margin: {
             top: 35,

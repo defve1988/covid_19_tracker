@@ -10,6 +10,7 @@ export default class {
         this.svg = null
         this.ticker = null
     }
+    
     gen_dataSlice(date) {
         let dateSlice = this.race_data
             .filter((d) => d.date == date && !isNaN(d.value))
